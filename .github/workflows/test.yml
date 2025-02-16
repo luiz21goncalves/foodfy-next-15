@@ -1,0 +1,42 @@
+name: Tests
+
+on: pull_request
+
+jobs:
+  unit:
+    name: Unit Tests nodejs v${{ matrix.nodejs}} pnpm v${{ matrix.nodejs }}
+    runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        nodejs: ['22.14.0']
+        pnpm: ['10.4.0']
+
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v4
+
+      - name: install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ matrix.pnpm }}
+
+      - name: cache node_modules
+        uses: actions/cache@v4
+        id: pnpm-cache
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-node${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.nodejs }}
+          cache: 'pnpm'
+
+        if: steps.pnpm-cache.outputs.cache-hit != 'true'
+      - run: pnpm install --prefer-offline --frozen-lockfile
+
+      - name: run test
+        run: pnpm run test
