@@ -8,6 +8,6 @@ export default defineConfig({
     globals: false,
     reporters: ['verbose'],
     environment: 'happy-dom',
-    setupFiles: ['./vitest.setup.ts']
-  }
+    setupFiles: ['./vitest.setup.ts'],
+  },
 })

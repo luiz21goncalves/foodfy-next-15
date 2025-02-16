@@ -3,10 +3,10 @@ import { describe, expect, it } from 'vitest'
 
 import Home from './page'
 
-describe('Home',() => {
+describe('Home', () => {
   it('should render the heading', () => {
-    render(<Home/>)
+    render(<Home />)
 
-    expect(screen.getByRole('heading')).toHaveTextContent("Home")
+    expect(screen.getByRole('heading')).toHaveTextContent('Home')
   })
 })

@@ -1,20 +1,19 @@
-import type { Metadata } from "next";
+import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: "Foodfy",
-  description: "Aprenda a construir os melhores pratos com receitas criadas por profissionais do mundo inteiro.",
-};
+  title: 'Foodfy',
+  description:
+    'Aprenda a construir os melhores pratos com receitas criadas por profissionais do mundo inteiro.',
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
-  return (  
+  return (
     <html lang="pt-BR">
-      <body>
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
-  );
+  )
 }
