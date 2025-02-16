@@ -1,10 +1,10 @@
-name: Tests
+name: Lint
 
 on: pull_request
 
 jobs:
-  unit:
-    name: Unit Tests nodejs v${{ matrix.nodejs}} pnpm v${{ matrix.nodejs }}
+  lint:
+    name: Lint nodejs v${{ matrix.nodejs}} pnpm v${{ matrix.nodejs }}
     runs-on: ubuntu-24.04
     strategy:
       matrix:
@@ -38,5 +38,5 @@ jobs:
         if: steps.pnpm-cache.outputs.cache-hit != 'true'
       - run: pnpm install --prefer-offline --frozen-lockfile
 
-      - name: run test
-        run: pnpm run test
+      - name: run lint
+        run: pnpm run lint
